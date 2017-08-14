@@ -3,6 +3,6 @@ module.exports = {
   build: false,
   branches: {
     master: false,
-    '/v[0-9]+(\.[0-9]+)*/': true
+    'tags/v[0-9]+(\.[0-9]+)*/': true
   }
 }
