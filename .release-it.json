@@ -1,8 +1,15 @@
 {
+  "scripts": {
+    "beforeStart": "git checkout master && git pull"
+  },
   "git": {
+    "requireCleanWorkingDir": false,
     "tagName": "v${version}"
   },
   "github": {
     "release": true
+  },
+  "npm": {
+    "publish": false
   }
 }
