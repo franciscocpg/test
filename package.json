@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "git@github.com:franciscocpg/test.git",
   "author": "Francisco Guimarães <francisco.cpg@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "release-it": "^10.3.1"
+  }
 }

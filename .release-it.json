@@ -7,6 +7,7 @@
   "git": {
     "requireCleanWorkingDir": false,
     "commit": false,
+    "push": false,
     "tagName": "v${version}"
   },
   "github": {
