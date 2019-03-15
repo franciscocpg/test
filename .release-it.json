@@ -1,9 +1,12 @@
 {
+  "pkgFiles": ["none.json"],
   "scripts": {
-    "beforeStart": "git checkout master && git pull"
+    "beforeStart": "git checkout master && git pull",
+    "changelog": "git log --pretty=format:\"* %s\" [REV_RANGE]",
   },
   "git": {
     "requireCleanWorkingDir": false,
+    "commit": false,
     "tagName": "v${version}"
   },
   "github": {
