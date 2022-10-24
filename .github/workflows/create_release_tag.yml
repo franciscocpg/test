@@ -1,4 +1,4 @@
-name: Create release
+name: Create release tag
 
 on:
   workflow_dispatch:
@@ -28,4 +28,3 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DEFAULT_BUMP: ${{ github.event.inputs.version }}
-        WITH_V: true
