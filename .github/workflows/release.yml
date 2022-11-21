@@ -15,6 +15,36 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Notify release
+        run: |
+          changelog=$(git log --color=never --pretty='tformat:%xe2%x80%xa2 `%h` %s (%an)' --tags $GITHUB_REF_NAME...$GITHUB_REF_NAME~1)
+
+          curl -sX POST \
+          --url ${{ secrets.SLACK_WEBHOOK_URL }} \
+          --header 'Content-Type: application/json' \
+          --data '{
+            "channel": "C04CJ5PV22C",
+            "icon_url": "https://avatars.githubusercontent.com/u/1534766",
+            "attachments": [
+              {
+                "pretext": "`jus-cli` released :rocket:",
+                "color": "#008000",
+                "fields": [
+                  {
+                    "title": "Version",
+                    "value": "<https://github.com/jusbrasil/jus-cli/releases/tag/${{ env.GITHUB_REF_NAME }}|${{ env.GITHUB_REF_NAME }}>",
+                    "short": false
+                  },
+                  {
+                    "title": "Changelog",
+                    "value": "'$changelog'",
+                    "short": false
+                  }
+                ]
+              }
+            ]
+          }'
+
       - name: Create release notes
         run: gh release create ${{ github.ref }} --generate-notes
         env:
