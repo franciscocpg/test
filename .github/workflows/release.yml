@@ -30,6 +30,7 @@ jobs:
           payload: |
             {
               "channel": "C04CJ5PV22C",
+              "username": "Release",
               "icon_url": "https://avatars.githubusercontent.com/u/1534766",
               "attachments": [
                 {
