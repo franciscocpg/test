@@ -68,7 +68,7 @@ jobs:
                     },
                     {
                       "title": "Changelog",
-                      "value": "${{ toJSON(env.CHANGELOG) }}",
+                      "value": ${{ toJSON(env.CHANGELOG) }},
                       "short": false
                     }
                   ]
