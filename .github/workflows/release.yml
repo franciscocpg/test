@@ -19,6 +19,8 @@ jobs:
         run: |
           changelog=$(git log --color=never --pretty='tformat:%xe2%x80%xa2 `%h` %s (%an)' --tags $GITHUB_REF_NAME...$GITHUB_REF_NAME~1)
 
+          echo "changelog $changelog"
+
           curl -sX POST \
           --url ${{ secrets.SLACK_WEBHOOK_URL }} \
           --header 'Content-Type: application/json' \
