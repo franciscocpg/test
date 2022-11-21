@@ -15,9 +15,28 @@ jobs:
         with:
           fetch-depth: 0
 
+      - id: get_latest_releases
+        name: Get latest releases
+        uses: octokit/graphql-action@v2.x
+        with:
+          query: |
+            query release($owner:String!, $name:String) {
+              repository(owner: $owner, name: $name) {
+                releases(first: 2, orderBy: {field: CREATED_AT, direction: DESC}) {
+                  nodes {
+                    name
+                  }
+                }
+              }
+            }
+          owner: ${{ github.event.repository.owner.name }}
+          repo: ${{ github.event.repository.name }}
+
       - name: Generate changelog
+        env:
+          PREVIOUS_TAG: ${{ fromJSON(steps.get_latest_releases.outputs.data).repository.releases.nodes[1].name }}
         run: |
-          changelog=$(git log --color=never --pretty='tformat:%xe2%x80%xa2 `%h` %s (%an)' --tags $GITHUB_REF_NAME...$GITHUB_REF_NAME~1)
+          changelog=$(git log --color=never --pretty='tformat:%xe2%x80%xa2 `%h` %s (%an)' --tags $GITHUB_REF_NAME...$PREVIOUS_TAG)
           echo "CHANGELOG=$changelog" >> $GITHUB_ENV
           echo "TAG=$GITHUB_REF_NAME" >> $GITHUB_ENV
 
