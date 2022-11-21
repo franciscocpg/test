@@ -38,14 +38,14 @@ jobs:
         env:
           PREVIOUS_TAG: ${{ fromJSON(steps.get_latest_releases.outputs.data).repository.releases.nodes[1].name }}
         run: |
-          changelog=$(git log --color=never --pretty='tformat:%xe2%x80%xa2 `%h` %s (%an)' --tags $GITHUB_REF_NAME...$PREVIOUS_TAG)
+          changelog=$(git log --color=never --pretty='tformat:%xe2%x80%xa2 `%h` %s (%an)' $GITHUB_REF_NAME...$PREVIOUS_TAG)
           echo 'CHANGELOG<<EOF' >> $GITHUB_ENV
           echo "$changelog" >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
           echo "TAG=$GITHUB_REF_NAME" >> $GITHUB_ENV
 
-      - name: Notify job status
+      - name: Notify release
         uses: slackapi/slack-github-action@v1.23.0
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
