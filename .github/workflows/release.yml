@@ -34,7 +34,7 @@ jobs:
                 "fields": [
                   {
                     "title": "Version",
-                    "value": "<https://github.com/jusbrasil/jus-cli/releases/tag/${{ env.GITHUB_REF_NAME }}|${{ env.GITHUB_REF_NAME }}>",
+                    "value": "<https://github.com/jusbrasil/jus-cli/releases/tag/'${{ env.GITHUB_REF_NAME }}'|'${{ env.GITHUB_REF_NAME }}'>",
                     "short": false
                   },
                   {
